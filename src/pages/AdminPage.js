@@ -447,9 +447,9 @@ function AdminPage() {
                     <td style={{ ...smallfont }}>
                       {item.surname.toUpperCase()}
                     </td>
-                    {/* <td style={{ ...smallfont }}>
+                    <td style={{ ...smallfont }}>
                       {item.chiefdom.toUpperCase()}
-                    </td> */}
+                    </td>
                     <td style={{ ...smallfont }}>
                       {item.inkhundla.toUpperCase()}
                     </td>
