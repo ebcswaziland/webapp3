@@ -241,15 +241,18 @@ function AdminPage() {
   }
 
   const editHandler = (item) => {
+    setPollstation("SPECIAL")
     setProduct(item);
     setShow(true);
   };
 
   const editHandler5 = (item) => {
+    setPollstation("DIASPORA")
     setProduct(item);
     setShow5(true);
 
   }; const editHandler6 = (item) => {
+    setPollstation("INMATE")
     setProduct(item);
     setShow6(true);
   };
@@ -467,18 +470,31 @@ function AdminPage() {
                       ) : (
                         <div>
                           {Object.keys(item.secondary_votes).length > 0 ? (
-                            // Attempt to get properties of the primary_votes object
+                            // Attempt to get properties of the secondary_votes object
                             Object.keys(item.secondary_votes).map((key) => (
                               <div key={key}>
-                                {key.toUpperCase()}:{" "}
-                                {item.secondary_votes[key].toUpperCase()}
+                                {key.toUpperCase()}: {item.secondary_votes[key].toUpperCase()}
                               </div>
                             ))
                           ) : (
-                            // Handle the case where primary_votes is not defined
+                            // Handle the case where secondary_votes is not defined
                             <span style={{ color: "red", fontSize: "90%" }}>
                               RESULTS NOT CAPTURED
                             </span>
+                          )}
+
+                          {/* Conditionally render the "Total Captured" value */}
+                          {Object.keys(item.secondary_votes).length > 0 && (
+                            <div>
+                              <span>
+                                <br></br>
+                                TOTAL CAPTURED: {" "}
+                                {Object.values(item.secondary_votes).reduce(
+                                  (acc, value) => acc + parseInt(value, 10),
+                                  0
+                                )}
+                              </span>
+                            </div>
                           )}
                         </div>
                       )}
@@ -650,7 +666,7 @@ function AdminPage() {
                   className="form-control"
                   placeholder="enter vote"
                   onChange={(e) => {
-                    setPollstation("SPECIAL")
+             
                     setProduct({
                       ...product,
                       secondary_votes: {
@@ -744,7 +760,7 @@ function AdminPage() {
                   className="form-control"
                   placeholder="enter vote"
                   onChange={(e) => {
-                    setPollstation("DIASPORA")
+              
                     setProduct({
                       ...product,
                       secondary_votes: {
@@ -830,7 +846,7 @@ function AdminPage() {
                   className="form-control"
                   placeholder="enter vote"
                   onChange={(e) => {
-                    setPollstation("INMATE")
+                  
                     setProduct({
                       ...product,
                       secondary_votes: {
