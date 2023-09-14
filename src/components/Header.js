@@ -8,6 +8,9 @@ function Header() {
   const { cartItems } = useSelector((state) => state.cartReducer);
   const { user } = JSON.parse(localStorage.getItem("currentUser"));
   // console.log("userqqqqqqqqqqqqqqqq " + user);
+  const pollstation = localStorage.getItem("pollstation");
+  const logouttext = "logout";
+
 
   const logout = () => {
     localStorage.removeItem("currentUser");
