@@ -409,9 +409,14 @@ function AdminPage() {
         defaultActiveKey="products"
         id="uncontrolled-tab-example"
         className="mb-3"
+        style={{ marginTop: '20px' }}
       >
         <Tab eventKey="products" title="BUCOPHO">
-          <div className="d-flex justify-content-between"></div>
+          <div className="d-flex justify-content-between" ></div>
+          <div
+            className="d-flex justify-content-between"
+            style={{ overflowX: "auto" }}
+          >
           <table className="table mt-3">
             <thead>
               <tr>
@@ -601,7 +606,7 @@ function AdminPage() {
             </tbody>
           </table>
 
-
+          </div>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>

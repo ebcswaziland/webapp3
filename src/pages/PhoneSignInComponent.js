@@ -122,7 +122,7 @@ function PhoneSignInComponent({ setShowPhoneSignIn }) {
 
         // Handle any further actions after phone sign-in here
         // Example: Redirect to a different page
-        window.location.href = "/admin/";
+        window.location.href = "/";
       })
       .catch((err) => {
         console.log(err);
