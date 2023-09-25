@@ -1,22 +1,22 @@
 import React from "react";
 //import "../stylesheets/layout.css";
-import { Link } from "react-router-dom";
-import { FaBars, FaCartPlus, FaUser } from "react-icons/fa";
+import { FaBars, FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Header() {
   const { cartItems } = useSelector((state) => state.cartReducer);
   const { user } = JSON.parse(localStorage.getItem("currentUser"));
   // console.log("userqqqqqqqqqqqqqqqq " + user);
-  const pollstation = localStorage.getItem("pollstation");
-  const logouttext = "logout";
-
 
   const logout = () => {
     localStorage.removeItem("currentUser");
     localStorage.removeItem("phone");
     localStorage.removeItem("pollstation");
-    localStorage.removeItem("poll");
+    localStorage.removeItem("mypolling2");
+    localStorage.removeItem("mypolling");
+    localStorage.removeItem("TAB");
+
     window.location.reload();
   };
 
@@ -24,16 +24,18 @@ function Header() {
     <div className="header">
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/">
+
             <div >
-              EBC RESULTS CAPTURING <span style={{ marginLeft: "70%", textAlign: 'center' }}>{pollstation.toUpperCase()}</span>
+              EBC RESULTS CAPTURING <span style={{ marginLeft: "60%", textAlign: 'center' }}>{`${localStorage.getItem("mystation")}`}</span>
+
             </div>
           </Link>
 
-          <div className="nav-item" style={{ marginLeft: "53%", fontSizeAdjust: '90px' }}>
+          <div className="nav-item" style={{ marginLeft: "50%" }}>
             <Link className="nav-link" to="/" onClick={logout}>
               <div>
-                {logouttext.toUpperCase()}
+                LOGOUT
               </div>
             </Link>
           </div>

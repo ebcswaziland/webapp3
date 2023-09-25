@@ -1,6 +1,5 @@
-import React, { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import PhoneSignInComponent from "./PhoneSignInComponent"; // Import the phone sign-in component
@@ -25,6 +24,7 @@ function LoginPage() {
     } catch (error) {
       console.log(error);
       toast.error("Login failed");
+
       setLoading(false);
     }
   };

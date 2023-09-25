@@ -1,26 +1,20 @@
 // PhoneSignInComponent.js
-import React, { useState } from "react";
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 import {
+  RecaptchaVerifier,
   getAuth,
   signInWithPhoneNumber,
-  RecaptchaVerifier,
 } from "firebase/auth";
-import { toast } from "react-toastify";
-import { CgSpinner } from "react-icons/cg";
-import OtpInput from "otp-input-react";
-import { BsFillShieldLockFill } from "react-icons/bs";
-import { BsTelephoneFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
 import {
-  collection,
-  getDoc,
-  setDoc,
   doc,
-  addDoc,
-  deleteDoc,
+  getDoc
 } from "firebase/firestore";
+import OtpInput from "otp-input-react";
+import React, { useState } from "react";
+import { BsFillShieldLockFill } from "react-icons/bs";
+import { CgSpinner } from "react-icons/cg";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { toast } from "react-toastify";
 import fireDB from "../fireConfig";
 function PhoneSignInComponent({ setShowPhoneSignIn }) {
   //   const history = useHistory();
@@ -39,7 +33,7 @@ function PhoneSignInComponent({ setShowPhoneSignIn }) {
           callback: (response) => {
             onSignup();
           },
-          "expired-callback": () => {},
+          "expired-callback": () => { },
         },
         auth
       );
@@ -69,8 +63,24 @@ function PhoneSignInComponent({ setShowPhoneSignIn }) {
         localStorage.setItem("primary_poll", mpData.primaryPollUrl);
         localStorage.setItem("pollstation", mpData.pollingStation);
 
+        // Check if 'mymap' exists in the document and if it's an object
+        if (mp.hasOwnProperty('REGISTER') && typeof mp.REGISTER === 'object' && mp.REGISTER !== null) {
+          const mymapData = mp.REGISTER; // Assuming 'mymap' is an object
+
+          // Store the 'mymapData' object in localStorage
+          localStorage.setItem("mymapData", JSON.stringify(mymapData));
+        }
+
+        // Check if 'mymap' exists in the document and if it's an object
+        if (mp.hasOwnProperty('REGISTER2') && typeof mp.REGISTER2 === 'object' && mp.REGISTER2 !== null) {
+          const mymapData2 = mp.REGISTER2; // Assuming 'mymap' is an object
+
+          // Store the 'mymapData' object in localStorage
+          localStorage.setItem("mymapData2", JSON.stringify(mymapData2));
+        }
+
         console.log(mp.pollURL);
-        console.log(mp.pollingStation);
+        console.log("UR DATA " + mp.REGISTER);
 
         const appVerifier = window.recaptchaVerifier;
 
@@ -98,6 +108,13 @@ function PhoneSignInComponent({ setShowPhoneSignIn }) {
     }
   }
 
+  function logErrorToTxtFile(error, phoneNumber, pageName) {
+    const currentTime = new Date().toLocaleString();
+    const logEntry = `Time: ${currentTime}, Phone Number: ${phoneNumber}, Page: ${pageName}, Error: ${error.message}\n`;
+
+
+  }
+
   function onOTPVerify() {
     setLoading(true);
     window.confirmationResult
@@ -116,16 +133,20 @@ function PhoneSignInComponent({ setShowPhoneSignIn }) {
 
         // Store user data in localStorage
         localStorage.setItem("currentUser", JSON.stringify(userData));
+        localStorage.setItem("TAB", "mps");
+        localStorage.setItem("mystation", "");
+
 
         setLoading(false);
         setShowPhoneSignIn(true); // Hide the phone sign-in component after successful login
 
         // Handle any further actions after phone sign-in here
         // Example: Redirect to a different page
-        window.location.href = "/";
+        window.location.href = "/admin/";
       })
       .catch((err) => {
         console.log(err);
+
         setLoading(false);
       });
   }
@@ -135,7 +156,7 @@ function PhoneSignInComponent({ setShowPhoneSignIn }) {
       <div id="recaptcha-container"></div>
       <div className="w-80 flex flex-col gap-4 rounded-lg p-4">
         <h1 className="text-center leading-normal text-black font-medium text-3xl mb-6">
-          EBC Votes Capturing - Special Bucopho
+          EBC Votes Capturing - ADMIN
         </h1>
         {showOTP ? (
           <>
