@@ -134,11 +134,11 @@ function AdminPage() {
                     cities: ["Hereford's", "Mavula", "Mfasini", "Mkhuzweni", "Mkhweni"]
                 },
                 {
-                    name: "Mbabane East",
+                    name: "Mbabane_East",
                     cities: ["Fonteyn", "Mdzimba_Lofokati", "Msunduza", "Sidvwashini"]
                 },
                 {
-                    name: "Mbabane West",
+                    name: "Mbabane_West",
                     cities: ["Mangwaneni", "Manzana", "Nkwalini"]
                 },
                 {
